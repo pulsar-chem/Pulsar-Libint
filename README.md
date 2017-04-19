@@ -4,7 +4,7 @@ Welcome to the repository for the LibInt2/Pulsar interface.  LibInt2 is a widely
 used integrals library for quantum chemistry and this repository ensures it is
 callable from the Pulsar framework.
 
-All credit for LibInt2 goes to the Valeyev group at Virginia Tech.  The official
+All credit for LibInt2 goes to the Valeev group at Virginia Tech.  The official
 repository is [here](https://github.com/evaleev/libint).  Questions, comments,
 and concerns regarding LibInt2's operation should be directed there.
 
