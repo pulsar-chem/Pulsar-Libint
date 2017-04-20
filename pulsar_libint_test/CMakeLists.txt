@@ -17,5 +17,9 @@ foreach(dir OneETests TwoETests)
   install(FILES ${CMAKE_BINARY_DIR}/${dir}/CTestTestfile.cmake DESTINATION ${dir})
 endforeach()
 
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        DESTINATION .
+        FILES_MATCHING PATTERN "*.hpp"
+)
 # This file was created from the various add_test commands
 install(FILES ${CMAKE_BINARY_DIR}/CTestTestfile.cmake DESTINATION .)

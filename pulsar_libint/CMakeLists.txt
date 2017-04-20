@@ -17,6 +17,7 @@ target_include_directories(pulsar_libint PRIVATE pulsar ${LIBINT_ROOT}
 target_link_libraries(pulsar_libint PRIVATE pulsar
                                             ${LIBINT2_LIBRARIES}
 )
+
 install(TARGETS pulsar_libint
         LIBRARY DESTINATION ${PULSAR_MODULE_DIR}/pulsar_libint
 )

@@ -29,8 +29,13 @@ Aside from a somewhat modern version of CMake (3.1+) and C++11 compilers, the
 main other requirement is an already installed version of Pulsar.  This module
 will download and install LibInt2 if it is not found.  That said, to use an
 already existing LibInt2 installation, ensure the path to the LibInt2's `lib`
-directory is included in `CMAKE_PREFIX_PATH`.  If this module is building
-LibInt2 you will additionally need Boost on your system.
+directory is included in `CMAKE_PREFIX_PATH` (or alternatively set
+`LIBINT2_LIBRARY` and `LIBINT2_INCLUDE_DIR` appropriately).  If this module is
+building LibInt2 you will additionally need to satisfy its dependencies, which
+are:
+- autoconf
+- pkg-config
+- boost
 
 ## TODOs
 

@@ -1,5 +1,6 @@
 #include <pulsar/testing/CppTester.hpp>
 #include <pulsar/modulebase/OneElectronIntegral.hpp>
+#include "../TestCommon.hpp"
 
 using namespace pulsar;
 
@@ -39,50 +40,16 @@ std::vector<std::vector<double>> corr={
     -5.3002032522950167,},
 };
 
-struct ptr_wrapper{
-    const double* ptr_;
-    size_t n_;
-    const double* begin()const{return ptr_;}
-    const double* end()const{return ptr_+n_;}
-};
 
 TEST_SIMPLE(TestNuclearElectron){
     CppTester tester("Testing the NuclearElectron class");
     const std::string name="NuclearElectron";
-    AtomSetUniverse MyU;
-    const double angstrom_to_bohr = 1 / 0.52917721092;
-    const double Oy=-0.07579*angstrom_to_bohr;
-    const double Hx=0.86681*angstrom_to_bohr;
-    const double Hy=0.60144*angstrom_to_bohr;
-    auto cg = pulsar::ShellType::CartesianGaussian;
-    const BasisShellInfo O1s(cg,0,3,1,
-                             {130.709320000, 23.808861000, 6.443608300},
-                             {0.15432897, 0.53532814, 0.44463454});
-    const BasisShellInfo O2s(cg,0,3,1,
-                             {5.033151300, 1.169596100, 0.380389000},
-                             {-0.09996723, 0.39951283, 0.70011547});
-    const BasisShellInfo O2p(cg,1,3,1,
-                             {5.033151300, 1.169596100, 0.380389000},
-                             {0.15591627, 0.60768372, 0.39195739});
-    const BasisShellInfo H1s(cg,0,3,1,
-                             {3.425250910, 0.623913730, 0.168855400},
-                             {0.15432897, 0.53532814, 0.44463454});
-    Atom O=create_atom({0.00000,Oy,0.00000},8);
-    O.basis_sets["PRIMARY"].shells=std::vector<BasisShellInfo>({O1s,O2s,O2p});
-    Atom H1=create_atom({Hx,Hy,0.00000},1);
-    H1.basis_sets["PRIMARY"].shells.push_back(H1s);
-    Atom H2=create_atom({-Hx,Hy,0.00000},1);
-    H2.basis_sets["PRIMARY"].shells.push_back(H1s);
-    MyU.insert(O);
-    MyU.insert(H1);
-    MyU.insert(H2);
-    Wavefunction wf;
-    wf.system=std::make_shared<System>(MyU,true);
-    auto mm=std::make_shared<ModuleManager>();
+    auto wf=make_wf();
     ModuleInfo minfo;
     minfo.path=PULSAR_LIBINT_LIBRARY;
     minfo.type="c_module";
     minfo.name=name;
+    auto mm=std::make_shared<ModuleManager>();
     mm->load_module_from_minfo(minfo,name);
     auto Ints=mm->get_module<OneElectronIntegral>(name,0);
     auto bs=wf.system->get_basis_set("PRIMARY");
@@ -100,7 +67,7 @@ TEST_SIMPLE(TestNuclearElectron){
             std::stringstream ss;
             ss<<"("<<si<<"|"<<sj<<")";
             ptr_wrapper wrapped_buffer={buffer,ni*nj};
-            tester.test_double(ss.str(),corr[counter],wrapped_buffer);
+            tester.test_double_vector(ss.str(),corr[counter],wrapped_buffer);
             ++counter;
         }
     }

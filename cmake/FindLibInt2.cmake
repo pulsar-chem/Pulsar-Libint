@@ -15,7 +15,7 @@ find_library(LIBINT2_LIBRARY NAMES libint2${CMAKE_STATIC_LIBRARY_SUFFIX}
              HINTS ${PC_LIBINT2_LIBDIR} ${PC_LIBINT2_LIBRARY_DIRS} )
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(LibInt2  DEFAULT_MSG
+find_package_handle_standard_args(LIBINT2 DEFAULT_MSG
                                   LIBINT2_LIBRARY LIBINT2_INCLUDE_DIR)
 
 mark_as_advanced(LIBINT2_INCLUDE_DIR LIBINT2_LIBRARY )

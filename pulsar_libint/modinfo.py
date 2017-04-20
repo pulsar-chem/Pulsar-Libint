@@ -4,7 +4,7 @@ from pulsar import OptionType
 c_mod,e2base,modpath="c_module","TwoElectronIntegral","pulsar_libint.so"
 e1base,version="OneElectronIntegral","0.1a"
 no_options={}
-no_ref,Ben,Ryan=[""],["Ryan Richard"]
+no_ref,Ryan=[""],["Ryan Richard"]
 
 mods=[["Kinetic","Overlap","NuclearElectron"],
       ["ERI"]]
@@ -19,3 +19,8 @@ for i in range(2):
             "authors":Ryan,
             "refs":no_ref,
             "options":no_options}
+cif="Computes integrals for the"
+minfo["Kinetic"]["description"]=cif+" kinetic energy of the electrons"
+minfo["Overlap"]["description"]=cif+" overlap of two one electron basis sets"
+minfo["NuclearElectron"]["description"]=cif+"nuclear-electron attraction"
+minfo["ERI"]["description"]=cif+" electron-electron repulsion integrals"
