@@ -1,8 +1,10 @@
 #pragma once
 #include <memory>
 #include <array>
+#include <limits>
 #include <pulsar_libint/pulsar_libint.hpp>
 #include <pulsar/modulebase/TwoElectronIntegral.hpp>
+#include <pulsar/datastore/OptionMap.hpp>
 #include <libint2.hpp>
 
 
@@ -48,8 +50,12 @@ public:
                                   bs_[1].max_l(bs_[1]),
                                   bs_[2].max_l(bs_[2]),
                                   bs_[3].max_l(bs_[3]));
+       const bool has_key= options().has_key("THRESHOLD");
+       const pulsar::OptionMap& opt=options();
+       double thresh(has_key ? opt.get<double>("THRESHOLD") :
+                               std::numeric_limits<double>::epsilon());
 
-       engine_=libint2::Engine(Op,max_prims,max_l,deriv);
+       engine_=libint2::Engine(Op,max_prims,max_l,deriv,thresh);
      }
 
      const double* calculate_(uint64_t shell1, uint64_t shell2,

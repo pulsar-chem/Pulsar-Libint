@@ -24,3 +24,7 @@ minfo["Kinetic"]["description"]=cif+" kinetic energy of the electrons"
 minfo["Overlap"]["description"]=cif+" overlap of two one electron basis sets"
 minfo["NuclearElectron"]["description"]=cif+"nuclear-electron attraction"
 minfo["ERI"]["description"]=cif+" electron-electron repulsion integrals"
+minfo["ERI"]["options"]={
+   "THRESHOLD":(OptionType.Float,0.0,False,None,
+       "Blocks of integrals below this threshold will be discarded")
+}
