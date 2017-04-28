@@ -12,7 +12,7 @@ endif()
 
 find_package(pulsar CONFIG REQUIRED)
 set(PULSAR_LIBINT_LIBRARY ${STAGE_DIR}/${PULSAR_MODULE_DIR}/pulsar_libint/pulsar_libint.so)
-foreach(dir OneETests TwoETests)
+foreach(dir TwoCenterTests ThreeCenterTests FourCenterTests)
   add_subdirectory(${dir})
   install(FILES ${CMAKE_BINARY_DIR}/${dir}/CTestTestfile.cmake DESTINATION ${dir})
 endforeach()

@@ -19,7 +19,8 @@ if(NOT LIBINT2_FOUND)
                             --with-max-am=4
                             --disable-t1g12-support
         BUILD_COMMAND make
-        INSTALL_COMMAND make install DESTDIR=${STAGE_DIR}
+        INSTALL_DIR ${STAGE_INSTALL_PREFIX}
+        INSTALL_COMMAND make install
     )
 else()
     add_library(libint INTERFACE)

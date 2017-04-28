@@ -18,8 +18,9 @@ be directed to this repository.
 
 At the moment I am primarily interested in ensuring I have wrapped LibInt2
 correctly so I am compiling with low angular momentum, no geminal integrals,
-and no derivatives.  To change this tweak `Pulsar-LibInt/CMakeLists.txt`.  In
-there is a thin wrapper around LibInt2's build system and it should be
+and no derivatives.  To change this tweak
+`Pulsar-LibInt/external/CMakeLists.txt`.  In there is a thin wrapper around
+LibInt2's build system and it should be
 self-explanatory as to how to use any of LibInt2's build options from that file.
 
 ## Compiling and Installing
