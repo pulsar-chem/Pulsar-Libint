@@ -11,11 +11,11 @@ mods=[["Kinetic","Overlap","Metric","NuclearElectron"],
       ["DF3C2E"],
       ["ERI"]]
 minfo={}
-for i in range(2):
+for i in range(3):
     for mod in mods[i]:
         minfo[mod]={
             "type":c_mod,
-            "base":e1base if i==0 else e2base,
+            "base":bases[i],
             "modpath":modpath,
             "version":version,
             "authors":Ryan,
