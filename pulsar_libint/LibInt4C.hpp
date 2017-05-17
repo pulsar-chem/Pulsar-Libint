@@ -30,6 +30,23 @@ public:
         libint2::finalize();
     }
 
+     HashType my_hash_(unsigned int deriv,
+                       const pulsar::Wavefunction& wfn,
+                       const pulsar::BasisSet& bs1,
+                       const pulsar::BasisSet& bs2,
+                       const pulsar::BasisSet& bs3,
+                       const pulsar::BasisSet& bs4)
+     {
+         auto opt_key=(options().has_key("THRESHOLD")?
+                bphash::hash_to_string(options().hash_values(std::set<std::string>({"THRESHOLD"})))
+                         :"");
+         return bphash::hash_to_string(bs1.my_hash())+
+                 bphash::hash_to_string(bs2.my_hash())+
+                 bphash::hash_to_string(bs3.my_hash())+
+                 bphash::hash_to_string(bs4.my_hash())+
+                 opt_key;
+     }
+
      void initialize_(unsigned int deriv,
                       const pulsar::Wavefunction &,
                       const pulsar::BasisSet & bs1,

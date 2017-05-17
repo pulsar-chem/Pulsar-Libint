@@ -24,6 +24,17 @@ public:
         libint2::finalize();
     }
 
+     HashType my_hash_(unsigned int deriv,
+                       const pulsar::Wavefunction& wfn,
+                       const pulsar::BasisSet& bs1,
+                       const pulsar::BasisSet& bs2,
+                       const pulsar::BasisSet& bs3)
+     {
+         return bphash::hash_to_string(bs1.my_hash())+
+                 bphash::hash_to_string(bs2.my_hash())+
+                 bphash::hash_to_string(bs3.my_hash());
+     }
+
      void initialize_(unsigned int deriv,
                       const pulsar::Wavefunction &,
                       const pulsar::BasisSet & bs1,
