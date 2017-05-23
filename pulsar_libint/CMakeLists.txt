@@ -19,9 +19,9 @@ target_link_libraries(pulsar_libint PRIVATE pulsar
 )
 
 install(TARGETS pulsar_libint
-        LIBRARY DESTINATION ${PULSAR_MODULE_DIR}/pulsar_libint
+        LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/pulsar_libint
 )
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-        DESTINATION ${PULSAR_MODULE_DIR}
+        DESTINATION ${CMAKE_INSTALL_PREFIX}
         FILES_MATCHING PATTERN "*.py"
 )
