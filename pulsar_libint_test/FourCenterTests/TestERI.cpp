@@ -12,7 +12,7 @@ TEST_SIMPLE(TestERI){
     auto mm=std::make_shared<ModuleManager>();
     ModuleInfo minfo;
     minfo.path=PULSAR_LIBINT_LIBRARY;
-    minfo.type="c_module";
+    minfo.language="c_module";
     minfo.name="ERI";
     mm->load_module_from_minfo(minfo,"ERI");
     auto eri=mm->get_module<FourCenterIntegral>("ERI",0);

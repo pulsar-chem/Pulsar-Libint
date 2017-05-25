@@ -47,7 +47,7 @@ TEST_SIMPLE(TestKinetic){
     auto mm=std::make_shared<ModuleManager>();
     ModuleInfo minfo;
     minfo.path=PULSAR_LIBINT_LIBRARY;
-    minfo.type="c_module";
+    minfo.language="c_module";
     minfo.name=name;
     mm->load_module_from_minfo(minfo,name);
     auto Ints=mm->get_module<TwoCenterIntegral>(name,0);

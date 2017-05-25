@@ -46,7 +46,7 @@ TEST_SIMPLE(TestOverlap){
     auto wf=make_wf();
     ModuleInfo minfo;
     minfo.path=PULSAR_LIBINT_LIBRARY;
-    minfo.type="c_module";
+    minfo.language="c_module";
     minfo.name=name;
     auto mm=std::make_shared<ModuleManager>();
     mm->load_module_from_minfo(minfo,name);

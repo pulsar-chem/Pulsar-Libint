@@ -60,7 +60,18 @@ Some particularly relevant CMake options are:
 - `CMAKE_PREFIX_PATH` This is a list of directories where CMake will look for
   dependencies.
 
-### Using the API
+## Uninstalling
+
+To uninstall Pulsar-Libint run:
+
+~~~.sh
+make uninstall
+~~~
+
+in the build directory.  This will remove the files associated with
+Pulsar-Libint.
+
+## Using the API
 
 TODO: Add link when documentation is automated.
 

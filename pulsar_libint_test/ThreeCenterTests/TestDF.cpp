@@ -15,7 +15,7 @@ TEST_SIMPLE(TestDF){
     auto mm=std::make_shared<ModuleManager>();
     ModuleInfo minfo;
     minfo.path=PULSAR_LIBINT_LIBRARY;
-    minfo.type="c_module";
+    minfo.language="c_module";
     minfo.name="DF3C2E";
     mm->load_module_from_minfo(minfo,"DFInts");
     auto eri=mm->get_module<ThreeCenterIntegral>("DFInts",0);
