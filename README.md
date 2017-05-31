@@ -1,75 +1,74 @@
-# LibInt/Pulsar Interface
+Pulsar-Libint
+=============
 
-Welcome to the repository for the LibInt/Pulsar interface.  LibInt is a widely
-used integrals library for quantum chemistry and this repository ensures it is
-callable from the Pulsar framework.
+Libint is a widely used integrals library for computing integrals involving
+electrons in quantum chemistry.  Pulsar-Libint provides Pulsar bindings for
+Libint allowing it to be called from the Pulsar framework (main page is
+:link:[here](https://github.com/pulsar-chem/Pulsar-Core)).
 
-All credit for LibInt goes to the Valeev group at Virginia Tech.  The official
+All credit for Libint goes to the Valeev group at Virginia Tech.  The official
 repository is :link:[here](https://github.com/evaleev/libint).  Questions,
-comments, and concerns regarding LibInt's operation should be directed there.
+comments, and concerns regarding Libint's operation should be directed there.
 
-This repository simply wraps the LibInt library in a manner consistent with the
-Pulsar framework, whose main page is
-[here](https://github.com/pulsar-chem/Pulsar-Core).  Questions, comments, and
-concerns regarding the integration of LibInt into the Pulsar framework should
-be directed to this repository.
+Contents
+========
+- [Obtaining Pulsar-Libint and Dependencies](#obtaining-pulsar-libint-and-dependencies)
+- [Building Pulsar-Libint](#building-pulsar-libint)
 
-## Compiling and Installing
+Obtaining Pulsar-Libint and Dependencies
+----------------------------------------
 
-This project will automatically build LibInt
-for you (if it can not locate it on your system).  Note that at the moment the
-resulting version of LibInt will be somewhat limited relative to a full install
-as it will only support up to a relatively low max angular momentum (g-shells,
+The official repository for the Pulsar-Libint interface is located
+:link:[here](https://github.com/pulsar-chem/Pulsar-Libint).  The source code for
+the interface can be obtined via the normal git clone command, *i.e.*
+```.sh
+git clone https://github.com/pulsar-chem/Pulsar-Libint.git
+```
+
+The only dependency of Pulsar-Libint (aside from the Pulsar framework) is
+Libint.  There are two options for how Pulsar-Libint can be provided a version
+of Libint:
+
+1. The path to an already installed Libint is provided to Pulsar-Libint during
+the configure step, or
+2. You let Pulsar-Libint compile Libint for you
+
+Although the latter choice is convenient it is worth mentioning some caveats.
+First, Libint depends on Boost.  If your version of Boost is not installed in a
+standard location, you will need to provide the path to it.  Second, the
+resulting version of LibInt will be somewhat limited relative to a full install.
+Namely, it will: only support a relatively low max angular momentum (g-shells,
 which limits your basis set to aug-cc-pVQZ for second row atoms), have no
-support for geminal integrals, and no derivative support.  To change this tweak
-`Pulsar-LibInt/external/CMakeLists.txt` using the build instructions located in
-the official LibInt repo.  Alternatively you may download and install your own
-LibInt library.  So long as said library's path is included in
-`CMAKE_PREFIX_PATH` CMake ought to find it.  Note if you go this route LibInt
-must be compiled with `-fPIC` in order to work correctly with Pulsar.
+support for geminal integrals, and have no derivative support.  These options
+are choosen to minimize the build time while still providing the functionality
+needed by other Pulsar supermodules.
 
-### Requirements
-Aside from a somewhat modern version of CMake (3.1+) and C++11 compilers, the
-main other requirement is an already installed version of Pulsar.  This module
-will download and install LibInt if it is not found.  That said, to use an
-already existing LibInt installation, ensure the path to the LibInt's `lib`
-directory is included in `CMAKE_PREFIX_PATH` (or alternatively set
-`LibInt_LIBRARY` and `LibInt_INCLUDE_DIR` appropriately).  If this module is
-building LibInt you will additionally need to satisfy its dependencies, which
-are:
-- autoconf
-- pkg-config
-- boost
+Building Pulsar-Libint
+-------------------------
 
-### Compiling
+As with most Pulsar supermodules, Pulsar-Libint uses CMake for the configuration
+step.  The result is that configuration should be possible via some variant of:
+```.sh
+cmake -Bbuild -H. -DOPTION1=VALUE1 -DOPTION2=...
+```
 
-It should be possible to compile Pulsar-LibInt via some variant of the following
+Some influential CMake variables you may want to consider setting are:
+| Option Name            | Default                 | Description |
+|:----------------------:|:-----------------------:|-------------|
+| CMAKE_C_COMPILER       | N/A | This is the C compiler to use.  By default CMake will try to find a C compiler on your system. Typically this means it will find  `/bin/gcc`.  |
+| CMAKE_CXX_COMPILER     | N/A | Similar to above, except for the C++ compiler. |
+| CMAKE_C_FLAGS          | N/A | Any additional flags you want to pass to the C compiler. |
+| CMAKE_CXX_FLAGS | N/A | Any additional flags you want to pass to the C++ compiler. |
+| CMAKE_BUILD_TYPE | Release | Can be used to enable debug builds.  Valid choices are: `Release`, `Debug`, or `RelWithDebInfo`. |
+| CMAKE_PREFIX_PATH | N/A | Used to tell CMake additional places to look for dependencies.  CMake will look for executables in `CMAKE_PREFIX_PATH/bin/`, libraries in `CMAKE_PREFIX_PATH/lib/`, *etc*. |
+| CMAKE_INSTALL_PREFIX | `/usr` | The root directory where the final project will be installed following usual GNU conventions.  *i.e.* libraries will be installed to `CMAKE_INSTALL_PREFIX/lib`, header files to `CMAKE_INSTALL_PREFIX/include`, *etc.* |
 
-~~~.sh
-cmake -H. -Bbuild -DCMAKE_OPTION_1=VALUE_1 -DCMAKE_OPTION_2=...
+After a successful configuration, it should be possible to complete the
+installation simply by issuing the commands:
+```.sh
 cd build && make
 make install
-~~~
-
-Some particularly relevant CMake options are:
-
-- `CMAKE_CXX_COMPILER` This is the C++ compiler to use
-- `CMAKE_INSTALL_PREFIX` This is where you want the result to be installed.  If
-  not set by the user the module will be installed into Pulsar Core's module
-  directory
-- `CMAKE_PREFIX_PATH` This is a list of directories where CMake will look for
-  dependencies.
-
-## Uninstalling
-
-To uninstall Pulsar-Libint run:
-
-~~~.sh
-make uninstall
-~~~
-
-in the build directory.  This will remove the files associated with
-Pulsar-Libint.
+```
 
 ## Using the API
 
