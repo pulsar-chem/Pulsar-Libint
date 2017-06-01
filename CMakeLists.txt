@@ -46,13 +46,14 @@ add_dependencies(pulsar_libint libint)
 # Pulsar LibInt tests
 ###############################
 
-
+set(PULSAR_LIBINT_PREFIX ${STAGE_DIR}${CMAKE_INSTALL_PREFIX}/pulsar_libint)
 ExternalProject_Add(pulsar_libint_test
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/pulsar_libint_test
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/test_stage
                -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
                -DSTAGE_DIR=${STAGE_DIR}
+               -DPULSAR_LIBINT_PREFIX=${PULSAR_LIBINT_PREFIX}
     BUILD_ALWAYS 1
     CMAKE_CACHE_ARGS -DCMAKE_PREFIX_PATH:LIST=${CMAKE_PREFIX_PATH}
                      -DCMAKE_INSTALL_RPATH:LIST=${CMAKE_INSTALL_RPATH}
